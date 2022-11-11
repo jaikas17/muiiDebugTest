@@ -58,13 +58,16 @@ float calcularRMS(int16_t *datos, int longitud)
 {
     float rms=0;
     float datoV;
-    for (int i=0;i<longitud;i++){
-        datoV=datos[i]/32768*3.3;
+    float cte=0.00000001014210283756256103515625;
+    for (int i=0;i<longitud;i++)
+    {
+        datoV=datos[i];
         rms+=datoV*datoV;
     }
-    rms=sqrt(rms/longitud);
+    rms=sqrt(rms/longitud*cte);
     return rms;
 }
+
  
 void calcularDatos(int16_t *datosV, int16_t *datosI, int longitud, estructuraMedidas *medidas)
 {
